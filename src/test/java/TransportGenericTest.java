@@ -2,6 +2,7 @@ import org.example.people.FireMan;
 import org.example.people.Person;
 import org.example.people.PoliceMan;
 import org.example.road.Road;
+import org.example.transport.Transport;
 import org.example.transport.bus.Bus;
 import org.example.transport.car.FireCar;
 import org.example.transport.car.PoliceCar;
@@ -172,5 +173,16 @@ class TransportGenericTest {
         assertThrows(IllegalArgumentException.class, () -> {
             road.addTransport(null);
         });
+    }
+
+    @Test
+    void testTransportWithPreFilledArray() {
+        Person[] passengers = {new Person(), null, new FireMan()};
+
+        Transport<Person> transport = new Transport<>(passengers) {};
+
+        assertEquals(3, transport.getMaxPlaces());
+        assertEquals(2, transport.getTakenPlaces());
+        assertEquals(1, transport.getFreePlaces());
     }
 }
